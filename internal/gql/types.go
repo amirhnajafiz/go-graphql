@@ -18,6 +18,11 @@ func AuthorType() *graphql.Object {
 				Type: graphql.NewList(BookType()),
 			},
 			"create": &graphql.Field{
+				Args: graphql.FieldConfigArgument{
+					"name": &graphql.ArgumentConfig{
+						Type: graphql.NewNonNull(graphql.String),
+					},
+				},
 				Resolve: func(p graphql.ResolveParams) (interface{}, error) {
 					author := store.Author{
 						Name: p.Args["name"].(string),

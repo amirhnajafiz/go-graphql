@@ -22,9 +22,22 @@ func Execute() {
 			}
 		}
 	`
+	insert := `
+		{
+			Authors {
+				create(name: "Amir") {
+				}
+			}
+		}
+	`
+
+	r := graphql.Do(graphql.Params{
+		Schema:        s,
+		RequestString: insert,
+	})
 
 	params := graphql.Params{Schema: s, RequestString: query}
-	r := graphql.Do(params)
+	r = graphql.Do(params)
 	if len(r.Errors) > 0 {
 		log.Fatalf("failed to execute graphql operation, errors: %+v", r.Errors)
 	}
