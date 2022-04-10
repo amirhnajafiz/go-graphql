@@ -1,8 +1,11 @@
 package gql
 
 import (
+	"github.com/amirhnajafiz/go-graphql/internal/store"
 	"github.com/graphql-go/graphql"
 )
+
+var authors []store.Author
 
 func AuthorType() *graphql.Object {
 	return graphql.NewObject(graphql.ObjectConfig{
@@ -13,6 +16,17 @@ func AuthorType() *graphql.Object {
 			},
 			"Books": &graphql.Field{
 				Type: graphql.NewList(BookType()),
+			},
+			"create": &graphql.Field{
+				Resolve: func(p graphql.ResolveParams) (interface{}, error) {
+					author := store.Author{
+						Name: p.Args["name"].(string),
+					}
+
+					authors = append(authors, author)
+
+					return author, nil
+				},
 			},
 		},
 	})
