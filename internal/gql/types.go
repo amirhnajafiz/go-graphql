@@ -23,7 +23,7 @@ func AuthorType() *graphql.Object {
 
 func AuthorMutation() *graphql.Object {
 	return graphql.NewObject(graphql.ObjectConfig{
-		Name: "author",
+		Name: "mutation",
 		Fields: graphql.Fields{
 			"create": &graphql.Field{
 				Args: graphql.FieldConfigArgument{

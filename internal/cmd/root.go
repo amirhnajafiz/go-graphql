@@ -23,10 +23,9 @@ func Execute() {
 		}
 	`
 	insert := `
-		{
-			authors {
-				create(name: "Amir") {
-				}
+		mutation {
+			create(name: "Amir") {
+				name
 			}
 		}
 	`
