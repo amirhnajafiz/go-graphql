@@ -26,9 +26,10 @@ func AuthorMutation() *graphql.Object {
 		Name: "mutation",
 		Fields: graphql.Fields{
 			"create": &graphql.Field{
+				Type: AuthorType(),
 				Args: graphql.FieldConfigArgument{
 					"name": &graphql.ArgumentConfig{
-						Type: graphql.NewNonNull(graphql.String),
+						Type: graphql.String,
 					},
 				},
 				Resolve: func(p graphql.ResolveParams) (interface{}, error) {
