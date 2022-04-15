@@ -14,7 +14,7 @@ func Init() graphql.Schema {
 	}
 
 	rootQuery := graphql.ObjectConfig{Name: "RootQuery", Fields: fields}
-	schemaConfig := graphql.SchemaConfig{Query: graphql.NewObject(rootQuery)}
+	schemaConfig := graphql.SchemaConfig{Query: graphql.NewObject(rootQuery), Mutation: AuthorMutation()}
 	schema, err := graphql.NewSchema(schemaConfig)
 	if err != nil {
 		log.Fatalf("failed to create new schema, error: %v", err)

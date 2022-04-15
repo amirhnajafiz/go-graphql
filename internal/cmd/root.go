@@ -24,7 +24,7 @@ func Execute() {
 	`
 	insert := `
 		{
-			Authors {
+			authors {
 				create(name: "Amir") {
 				}
 			}
