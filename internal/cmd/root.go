@@ -12,14 +12,15 @@ func Execute() {
 	query := `
 		{
 			author {
-				Name
+				Name: "Amir" {
+				}
 			}
 		}
 	`
 	insert := `
 		mutation {
 			create(name: "Amir") {
-				name
+				Name
 			}
 		}
 	`
