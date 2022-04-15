@@ -13,12 +13,8 @@ func Execute() {
 	s := gql.Init()
 	query := `
 		{
-			Authors {
+			author {
 				Name
-				Books {
-					Title
-					PublishDate
-				}
 			}
 		}
 	`
