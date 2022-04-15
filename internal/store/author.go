@@ -11,8 +11,6 @@ type Author struct {
 	Books []Book
 }
 
-var authors []Author
-
 var authorType = graphql.NewObject(
 	graphql.ObjectConfig{
 		Name: "Author",
@@ -51,7 +49,8 @@ func SetupAuthorMutations() *graphql.Field {
 				Name: p.Args["name"].(string),
 			}
 
-			authors = append(authors, author)
+			db, _ := gorm.Open("sqlite3", "authors.db")
+			db.Save(&author)
 
 			return author, nil
 		},
