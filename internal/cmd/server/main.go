@@ -11,6 +11,8 @@ import (
 )
 
 func Init(s graphql.Schema) *gin.Engine {
+	gin.SetMode(gin.TestMode)
+
 	app := gin.Default()
 
 	app.GET("/", func(context *gin.Context) {
