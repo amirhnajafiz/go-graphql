@@ -17,16 +17,20 @@ var authorType = graphql.NewObject(
 				Type: graphql.String,
 			},
 			"Books": &graphql.Field{
-				Type: graphql.NewList(graphql.Int),
+				Type: graphql.NewList(GetBookType()),
 			},
 		},
 	},
 )
 
+func GetAuthorType() *graphql.Object {
+	return authorType
+}
+
 func SetupAuthorMutations() graphql.Fields {
 	return graphql.Fields{
 		"create": &graphql.Field{
-			Type: authorType,
+			Type: GetAuthorType(),
 			Args: graphql.FieldConfigArgument{
 				"name": &graphql.ArgumentConfig{
 					Type: graphql.String,
