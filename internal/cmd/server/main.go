@@ -13,6 +13,10 @@ import (
 func Init(s graphql.Schema) *gin.Engine {
 	app := gin.Default()
 
+	app.GET("/", func(context *gin.Context) {
+		context.HTML(http.StatusOK, "template/index.html", gin.H{})
+	})
+
 	app.POST("/query", func(context *gin.Context) {
 		jsonData, err := ioutil.ReadAll(context.Request.Body)
 		if err != nil {
