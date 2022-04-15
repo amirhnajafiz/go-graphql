@@ -11,7 +11,7 @@ import (
 )
 
 func Init() graphql.Schema {
-	db, err := gorm.Open("sqlite3", "tutorials.db")
+	db, err := gorm.Open("sqlite3", "authors.db")
 	if err != nil {
 		log.Fatal(err)
 	}
