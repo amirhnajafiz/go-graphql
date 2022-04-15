@@ -40,3 +40,25 @@ var bookType = graphql.NewObject(graphql.ObjectConfig{
 func GetBookType() *graphql.Object {
 	return bookType
 }
+
+func SetupBookMutation() *graphql.Field {
+	return &graphql.Field{
+		Name: "add",
+		Type: GetBookType(),
+		Args: graphql.FieldConfigArgument{},
+		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
+			book := Book{
+				Title:       p.Args["title"].(string),
+				Reference:   p.Args["title"].(string),
+				PublishDate: p.Args["title"].(time.Time),
+				Sells:       p.Args["title"].(int),
+				Price:       p.Args["title"].(float64),
+			}
+
+			db, _ := gorm.Open("sqlite3", "authors.db")
+			db.Save(&book)
+
+			return book, nil
+		},
+	}
+}

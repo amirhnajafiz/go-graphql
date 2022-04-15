@@ -16,6 +16,7 @@ func Init() graphql.Schema {
 		Name: "Mutation",
 		Fields: graphql.Fields{
 			"create": store.SetupAuthorMutations(),
+			"add":    store.SetupBookMutation(),
 		},
 	})
 
