@@ -1,8 +1,12 @@
 package store
 
-import "github.com/graphql-go/graphql"
+import (
+	"github.com/graphql-go/graphql"
+	"github.com/jinzhu/gorm"
+)
 
 type Author struct {
+	gorm.Model
 	Name  string
 	Books []Book
 }

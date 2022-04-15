@@ -4,9 +4,11 @@ import (
 	"time"
 
 	"github.com/graphql-go/graphql"
+	"github.com/jinzhu/gorm"
 )
 
 type Book struct {
+	gorm.Model
 	Title       string
 	Reference   string
 	PublishDate time.Time
