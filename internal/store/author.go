@@ -7,6 +7,8 @@ type Author struct {
 	Books []Book
 }
 
+var authors []Author
+
 var authorType = graphql.NewObject(
 	graphql.ObjectConfig{
 		Name: "Author",
@@ -20,3 +22,25 @@ var authorType = graphql.NewObject(
 		},
 	},
 )
+
+func SetupAuthorMutations() graphql.Fields {
+	return graphql.Fields{
+		"create": &graphql.Field{
+			Type: authorType,
+			Args: graphql.FieldConfigArgument{
+				"name": &graphql.ArgumentConfig{
+					Type: graphql.String,
+				},
+			},
+			Resolve: func(p graphql.ResolveParams) (interface{}, error) {
+				author := Author{
+					Name: p.Args["name"].(string),
+				}
+
+				authors = append(authors, author)
+
+				return author, nil
+			},
+		},
+	}
+}
