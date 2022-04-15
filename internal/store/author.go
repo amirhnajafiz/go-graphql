@@ -27,24 +27,29 @@ func GetAuthorType() *graphql.Object {
 	return authorType
 }
 
-func SetupAuthorMutations() graphql.Fields {
-	return graphql.Fields{
-		"create": &graphql.Field{
-			Type: GetAuthorType(),
-			Args: graphql.FieldConfigArgument{
-				"name": &graphql.ArgumentConfig{
-					Type: graphql.String,
-				},
-			},
-			Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-				author := Author{
-					Name: p.Args["name"].(string),
-				}
+func SetupSingleAuthorSchema() *graphql.Field {
+	return &graphql.Field{
+		Type: GetAuthorType(),
+	}
+}
 
-				authors = append(authors, author)
-
-				return author, nil
+func SetupAuthorMutations() *graphql.Field {
+	return &graphql.Field{
+		Name: "create",
+		Type: GetAuthorType(),
+		Args: graphql.FieldConfigArgument{
+			"name": &graphql.ArgumentConfig{
+				Type: graphql.String,
 			},
+		},
+		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
+			author := Author{
+				Name: p.Args["name"].(string),
+			}
+
+			authors = append(authors, author)
+
+			return author, nil
 		},
 	}
 }
