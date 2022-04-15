@@ -7,6 +7,7 @@ import (
 	"github.com/amirhnajafiz/go-graphql/internal/store"
 	"github.com/graphql-go/graphql"
 	"github.com/jinzhu/gorm"
+	_ "github.com/mattn/go-sqlite3"
 )
 
 func Init() graphql.Schema {
