@@ -3,10 +3,8 @@ package cmd
 import (
 	"encoding/json"
 	"fmt"
-	"log"
 
 	"github.com/amirhnajafiz/go-graphql/internal/gql"
-	"github.com/graphql-go/graphql"
 )
 
 func Execute() {
@@ -26,17 +24,9 @@ func Execute() {
 		}
 	`
 
-	r := graphql.Do(graphql.Params{
-		Schema:        s,
-		RequestString: insert,
-	})
-
-	params := graphql.Params{Schema: s, RequestString: query}
-	r = graphql.Do(params)
-	if len(r.Errors) > 0 {
-		log.Fatalf("failed to execute graphql operation, errors: %+v", r.Errors)
-	}
-
+	_ = gql.ExecuteQuery(insert, s)
+	r := gql.ExecuteQuery(query, s)
 	rJSON, _ := json.Marshal(r)
+
 	fmt.Printf("%s \n", rJSON)
 }
