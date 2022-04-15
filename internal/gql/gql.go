@@ -6,9 +6,20 @@ import (
 
 	"github.com/amirhnajafiz/go-graphql/internal/store"
 	"github.com/graphql-go/graphql"
+	"github.com/jinzhu/gorm"
 )
 
 func Init() graphql.Schema {
+	db, err := gorm.Open("sqlite3", "tutorials.db")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	defer db.Close()
+
+	db.AutoMigrate(&store.Author{})
+	db.AutoMigrate(&store.Book{})
+
 	aggregateSchema := graphql.Fields{
 		"author": store.SetupSingleAuthorSchema(),
 	}
