@@ -1,8 +1,9 @@
 package store
 
 import (
-	"github.com/graphql-go/graphql"
 	"time"
+
+	"github.com/graphql-go/graphql"
 )
 
 type Book struct {
