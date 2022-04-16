@@ -2,6 +2,7 @@ package config
 
 import (
 	"encoding/json"
+	"github.com/amirhnajafiz/go-graphql/internal/logger"
 	"log"
 
 	"github.com/amirhnajafiz/go-graphql/internal/gql"
@@ -13,9 +14,10 @@ import (
 
 type (
 	Config struct {
-		Port  string
-		Proxy string
-		GQL   gql.Config
+		Port   string
+		Proxy  string
+		GQL    gql.Config
+		Logger logger.Config
 	}
 )
 

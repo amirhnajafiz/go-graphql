@@ -10,7 +10,7 @@ import (
 
 func Execute() {
 	c := config.Load()
-	l := logger.New(logger.Config{})
+	l := logger.New(c.Logger)
 	s, err := gql.Init(c.GQL)
 
 	if err != nil {
