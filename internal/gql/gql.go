@@ -2,7 +2,6 @@ package gql
 
 import (
 	"fmt"
-	"log"
 
 	"github.com/amirhnajafiz/go-graphql/internal/store"
 	"github.com/graphql-go/graphql"
@@ -10,10 +9,10 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-func Init() graphql.Schema {
+func Init() (graphql.Schema, error) {
 	db, err := gorm.Open("sqlite3", "authors.db")
 	if err != nil {
-		log.Fatal(err)
+		return graphql.Schema{}, err
 	}
 
 	defer db.Close()
@@ -37,21 +36,21 @@ func Init() graphql.Schema {
 
 	schema, err := graphql.NewSchema(schemaConfig)
 	if err != nil {
-		log.Fatalf("failed to create new schema, error: %v", err)
+		return graphql.Schema{}, err
 	}
 
-	return schema
+	return schema, nil
 }
 
-func ExecuteQuery(query string, schema graphql.Schema) *graphql.Result {
+func ExecuteQuery(query string, schema graphql.Schema) (*graphql.Result, error) {
 	result := graphql.Do(graphql.Params{
 		Schema:        schema,
 		RequestString: query,
 	})
 
 	if len(result.Errors) > 0 {
-		fmt.Printf("wrong result, unexpected errors: %v", result.Errors)
+		return nil, fmt.Errorf("wrong result, unexpected errors: %v", result.Errors)
 	}
 
-	return result
+	return result, nil
 }
