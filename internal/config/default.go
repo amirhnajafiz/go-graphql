@@ -10,7 +10,7 @@ func Default() Config {
 		Port:  ":5000",
 		Proxy: "0.0.0.0",
 		GQL: gql.Config{
-			Database: "authors.db",
+			Database: "library.db",
 		},
 		Logger: logger.Config{
 			Level: "debug",

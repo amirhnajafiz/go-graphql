@@ -26,8 +26,8 @@ func Init(cfg Config) (graphql.Schema, error) {
 	aggregateMutation := graphql.NewObject(graphql.ObjectConfig{
 		Name: "Mutation",
 		Fields: graphql.Fields{
-			"create": store.SetupAuthorMutations(cfg.Database),
-			"add":    store.SetupBookMutation(cfg.Database),
+			"create": store.CreateAuthorMutations(cfg.Database),
+			"add":    store.AddBookMutation(cfg.Database),
 		},
 	})
 

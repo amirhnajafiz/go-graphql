@@ -35,7 +35,7 @@ func SetupSingleAuthorSchema() *graphql.Field {
 	}
 }
 
-func SetupAuthorMutations(database string) *graphql.Field {
+func CreateAuthorMutations(database string) *graphql.Field {
 	return &graphql.Field{
 		Name: "create",
 		Type: GetAuthorType(),

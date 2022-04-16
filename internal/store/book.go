@@ -41,7 +41,7 @@ func GetBookType() *graphql.Object {
 	return bookType
 }
 
-func SetupBookMutation(database string) *graphql.Field {
+func AddBookMutation(database string) *graphql.Field {
 	return &graphql.Field{
 		Name: "add",
 		Type: GetBookType(),
