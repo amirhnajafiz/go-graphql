@@ -8,7 +8,7 @@ import (
 type Author struct {
 	gorm.Model
 	Name  string
-	Books []Book
+	Books []int
 }
 
 var authorType = graphql.NewObject(
@@ -19,7 +19,7 @@ var authorType = graphql.NewObject(
 				Type: graphql.String,
 			},
 			"Books": &graphql.Field{
-				Type: graphql.NewList(GetBookType()),
+				Type: graphql.NewList(graphql.Int),
 			},
 		},
 	},
