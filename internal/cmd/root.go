@@ -2,14 +2,16 @@ package cmd
 
 import (
 	"github.com/amirhnajafiz/go-graphql/internal/cmd/server"
+	"github.com/amirhnajafiz/go-graphql/internal/config"
 	"github.com/amirhnajafiz/go-graphql/internal/gql"
 	"github.com/amirhnajafiz/go-graphql/internal/logger"
 	"go.uber.org/zap"
 )
 
 func Execute() {
+	c := config.Load()
 	l := logger.New(logger.Config{})
-	s, err := gql.Init()
+	s, err := gql.Init(c.GQL)
 
 	if err != nil {
 		l.Error("schema creation failed", zap.Error(err))

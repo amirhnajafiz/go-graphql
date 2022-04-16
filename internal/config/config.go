@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"log"
 
+	"github.com/amirhnajafiz/go-graphql/internal/gql"
 	"github.com/knadh/koanf"
 	"github.com/knadh/koanf/parsers/yaml"
 	"github.com/knadh/koanf/providers/file"
@@ -12,6 +13,7 @@ import (
 
 type (
 	Config struct {
+		GQL gql.Config
 	}
 )
 

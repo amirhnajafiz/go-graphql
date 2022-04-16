@@ -9,8 +9,8 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-func Init() (graphql.Schema, error) {
-	db, err := gorm.Open("sqlite3", "authors.db")
+func Init(cfg Config) (graphql.Schema, error) {
+	db, err := gorm.Open("sqlite3", cfg.Database)
 	if err != nil {
 		return graphql.Schema{}, err
 	}
@@ -26,8 +26,8 @@ func Init() (graphql.Schema, error) {
 	aggregateMutation := graphql.NewObject(graphql.ObjectConfig{
 		Name: "Mutation",
 		Fields: graphql.Fields{
-			"create": store.SetupAuthorMutations(),
-			"add":    store.SetupBookMutation(),
+			"create": store.SetupAuthorMutations(cfg.Database),
+			"add":    store.SetupBookMutation(cfg.Database),
 		},
 	})
 
