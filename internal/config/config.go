@@ -14,10 +14,10 @@ import (
 
 type (
 	Config struct {
-		Port   string
-		Proxy  string
-		GQL    gql.Config
-		Logger logger.Config
+		Port   string        `koanf:"port"`
+		Proxy  string        `koanf:"proxy"`
+		GQL    gql.Config    `koanf:"gql"`
+		Logger logger.Config `koanf:"logger"`
 	}
 )
 

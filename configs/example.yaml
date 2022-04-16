@@ -1,0 +1,6 @@
+port: ":5000"
+proxy: "0.0.0.0"
+gql:
+  database: "library.db"
+logger:
+  level: "debug"
