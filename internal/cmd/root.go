@@ -8,8 +8,12 @@ import (
 )
 
 func Execute() {
-	s := gql.Init()
 	l := logger.New(logger.Config{})
+	s, err := gql.Init()
+
+	if err != nil {
+		l.Error("schema creation failed", zap.Error(err))
+	}
 
 	app := server.Server{
 		L: l,
@@ -17,7 +21,7 @@ func Execute() {
 	}.Init()
 	_ = app.SetTrustedProxies([]string{"0.0.0.0"})
 
-	err := app.Run(":5000")
+	err = app.Run(":5000")
 	if err != nil {
 		l.Error("server start failed", zap.Error(err))
 	}
