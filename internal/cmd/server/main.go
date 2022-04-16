@@ -17,9 +17,9 @@ type Server struct {
 }
 
 func (s Server) Init() *gin.Engine {
-	gin.SetMode(gin.TestMode)
-
 	app := gin.Default()
+
+	gin.SetMode(gin.TestMode)
 
 	app.GET("/", func(context *gin.Context) {
 		s.L.Info("root request")
