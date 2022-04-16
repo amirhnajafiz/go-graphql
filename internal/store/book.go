@@ -41,12 +41,21 @@ func GetBookType() *graphql.Object {
 	return bookType
 }
 
+func SetupSingleBookSchema() *graphql.Field {
+	return &graphql.Field{
+		Type: GetBookType(),
+	}
+}
+
 func AddBookMutation(database string) *graphql.Field {
 	return &graphql.Field{
 		Name: "add",
 		Type: GetBookType(),
 		Args: graphql.FieldConfigArgument{},
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
+			var a Author
+
+			author := p.Args["author_id"].(int)
 			book := Book{
 				Title:       p.Args["title"].(string),
 				Reference:   p.Args["title"].(string),
@@ -56,7 +65,13 @@ func AddBookMutation(database string) *graphql.Field {
 			}
 
 			db, _ := gorm.Open("sqlite3", database)
+
 			db.Save(&book)
+			db.First(&a, author)
+
+			a.Books = append(a.Books, int(book.ID))
+
+			db.Save(a)
 
 			return book, nil
 		},
