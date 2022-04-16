@@ -21,9 +21,9 @@ func Execute() {
 		L: l,
 		S: s,
 	}.Init()
-	_ = app.SetTrustedProxies([]string{"0.0.0.0"})
+	_ = app.SetTrustedProxies([]string{c.Proxy})
 
-	err = app.Run(":5000")
+	err = app.Run(c.Port)
 	if err != nil {
 		l.Error("server start failed", zap.Error(err))
 	}

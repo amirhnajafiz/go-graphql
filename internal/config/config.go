@@ -13,7 +13,9 @@ import (
 
 type (
 	Config struct {
-		GQL gql.Config
+		Port  string
+		Proxy string
+		GQL   gql.Config
 	}
 )
 
