@@ -14,6 +14,7 @@ type Book struct {
 	PublishDate time.Time
 	Sells       int
 	Price       float64
+	Author      uint
 }
 
 var bookType = graphql.NewObject(graphql.ObjectConfig{
@@ -55,19 +56,19 @@ func AddBookMutation(database string) *graphql.Field {
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
 			var a Author
 
-			author := p.Args["author_id"].(int)
 			book := Book{
 				Title:       p.Args["title"].(string),
 				Reference:   p.Args["title"].(string),
 				PublishDate: p.Args["title"].(time.Time),
 				Sells:       p.Args["title"].(int),
 				Price:       p.Args["title"].(float64),
+				Author:      p.Args["author_id"].(uint),
 			}
 
 			db, _ := gorm.Open("sqlite3", database)
 
 			db.Save(&book)
-			db.First(&a, author)
+			db.First(&a, book.Author)
 
 			a.Books = append(a.Books, int(book.ID))
 
