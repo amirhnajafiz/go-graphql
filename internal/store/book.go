@@ -41,7 +41,7 @@ func GetBookType() *graphql.Object {
 	return bookType
 }
 
-func SetupBookMutation() *graphql.Field {
+func SetupBookMutation(database string) *graphql.Field {
 	return &graphql.Field{
 		Name: "add",
 		Type: GetBookType(),
@@ -55,7 +55,7 @@ func SetupBookMutation() *graphql.Field {
 				Price:       p.Args["title"].(float64),
 			}
 
-			db, _ := gorm.Open("sqlite3", "authors.db")
+			db, _ := gorm.Open("sqlite3", database)
 			db.Save(&book)
 
 			return book, nil

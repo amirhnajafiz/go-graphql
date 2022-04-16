@@ -35,7 +35,7 @@ func SetupSingleAuthorSchema() *graphql.Field {
 	}
 }
 
-func SetupAuthorMutations() *graphql.Field {
+func SetupAuthorMutations(database string) *graphql.Field {
 	return &graphql.Field{
 		Name: "create",
 		Type: GetAuthorType(),
@@ -49,7 +49,7 @@ func SetupAuthorMutations() *graphql.Field {
 				Name: p.Args["name"].(string),
 			}
 
-			db, _ := gorm.Open("sqlite3", "authors.db")
+			db, _ := gorm.Open("sqlite3", database)
 			db.Save(&author)
 
 			return author, nil
