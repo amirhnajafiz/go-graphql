@@ -50,7 +50,15 @@ func (s Server) Init() *gin.Engine {
 			return
 		}
 
-		r := gql.ExecuteQuery(query.Query, s.S)
+		r, err := gql.ExecuteQuery(query.Query, s.S)
+		if err != nil {
+			_ = context.Error(err)
+
+			s.L.Error("query execution failed", zap.Error(err))
+
+			return
+		}
+
 		rJSON, _ := json.Marshal(r)
 
 		s.L.Info("successful query executed")
