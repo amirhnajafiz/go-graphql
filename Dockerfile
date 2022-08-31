@@ -4,8 +4,6 @@ WORKDIR /app/src/
 
 COPY . .
 
-WORKDIR /cmd/
-
 RUN go build -o ./runner
 
 FROM alpine:leates
