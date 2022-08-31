@@ -9,6 +9,7 @@ import (
 
 type Book struct {
 	gorm.Model
+
 	Title       string
 	Reference   string
 	PublishDate time.Time

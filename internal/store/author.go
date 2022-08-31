@@ -7,6 +7,7 @@ import (
 
 type Author struct {
 	gorm.Model
+
 	Name  string
 	Books []int
 }
