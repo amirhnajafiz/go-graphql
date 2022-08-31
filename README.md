@@ -1,3 +1,7 @@
+<p align="center">
+<img src="assets/logo.png" alt="logo" />
+</p>
+
 <h1 align="center">
 Go GraphQL
 </h1>
